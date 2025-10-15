@@ -22,12 +22,16 @@ function getSelectedPost() {
     document.querySelector(".post").innerHTML = `
       <h2 class="my-3">${post.author.username} Post</h2>
     <div class="card shadow mb-4" style="width: 100%;">
-    <div class="card-header user d-flex align-center align-items-center gap-2">
-      <img class=" border border-2" style="width: 40px; height: 40px; border-radius: 50%; cursor: pointer;"
-        src="${post.author.profile_image}">
-      <b class="username">${post.author.username}</b>
-    </div>
-    <div class="card-body" onclick="postClicked(${post.id})">
+    <div class="card-header user d-flex align-items-center justify-content-between gap-2">
+          <div class="user-info" style="cursor: pointer" onclick="goToUserProfile(${
+            post.author.id
+          })">
+            <img class=" border border-2" style="width: 40px; height: 40px; border-radius: 50%; cursor: pointer;"
+            src="${post.author.profile_image}">
+           <b class="username">${post.author.username}</b>
+          </div>
+        </div> 
+    <div class="card-body">
       <img src="${post.image}" class="card-img-top" alt="post-img">
       <span class="time">${post.created_at}</span>
       <h5 class="card-title mt-2">${post.title !== null ? post.title : ""}</h5>
