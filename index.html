@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarmeez - Social Media Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/loader.css">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <!-- === Loader === -->
+  <div id="loader">
+    <div class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <!-- === Modals === -->
+  <div class="modals">
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">username:</label>
+                <input type="text" class="form-control" id="log-username">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">password:</label>
+                <input type="password" class="form-control" id="log-password">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="login" onclick="login()">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Register</h1>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">username:</label>
+                <input type="text" class="form-control" id="username">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">password:</label>
+                <input type="password" class="form-control" id="password">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Profile Image:</label>
+                <input type="file" class="form-control" id="user-image">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="name">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Email:</label>
+                <input type="email" class="form-control" id="email">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="register" onclick="register()">Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create/Update Post Modal -->
+    <div class="create-modal modal fade" id="postModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Create A New Post</h1>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" id="post-title">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Body:</label>
+                <textarea class="form-control" id="post-body" style="resize: none; height: 120px"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Post Image:</label>
+                <input type="file" class="form-control" id="post-image">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary action-btn" onclick="createNewPost()">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Post Modal -->
+    <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h5>Are you sure you want to delete the post?</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" onclick="deletePost()">yes, Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- === Alerts === -->
+  <div class="alerts">
+    <div id="specialAlert"></div>
+  </div>
+
+
+  <!-- ====== Create New Post Btn ====== -->
+  <div class="create-btn btn btn-primary justify-content-center align-items-center fw-bold shadow"
+    onclick="createBtnClicked()">+</div>
+
+  <!-- Navbar -->
+  <div class="container">
+    <div class="col-9 m-auto">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm rounded pt-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">Tarmeez</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link profile-link" href="profile.html">Profile</a>
+              </li>
+            </ul>
+
+            <div class="user-btns d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                data-bs-target="#loginModal">Login</button>
+              <button type="button" class="btn btn-outline-success">Register</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+  </div>
+
+  <!-- Posts -->
+  <div class="container mt-5">
+    <div class="posts col-9 m-auto">
+      <div class="text-center mb-4">
+        <h1 class="display-4 fw-bold text-white mb-3">Welcome to Tarmeez</h1>
+        <p class="lead text-white-50">Connect, share, and discover amazing content</p>
+      </div>
+    </div>
+
+  </div>
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/home.js"></script>
+</body>
+
+</html>
