@@ -1,3 +1,5 @@
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 const baseUrl = "https://tarmeezacademy.com/api/v1";
 let mode = "home";
 
